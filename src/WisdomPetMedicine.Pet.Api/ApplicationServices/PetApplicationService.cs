@@ -45,7 +45,7 @@ namespace WisdomPetMedicine.Pet.Api.ApplicationServices
                 };
 
                 await PublishIntegrationEventAsync(integrationEvent
-                    , configuration["ServiceBus:ConnectionString"]
+                    , configuration["sb-pet-flag-for-adoption"]
                     , configuration["ServiceBus:Adoption:QueueName"]);
             });
         }

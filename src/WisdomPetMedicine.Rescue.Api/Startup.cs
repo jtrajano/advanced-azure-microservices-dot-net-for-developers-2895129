@@ -6,6 +6,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi;
 using WisdomPetMedicine.Rescue.Api.ApplicationServices;
 using WisdomPetMedicine.Rescue.Api.Infrastructure;
+using WisdomPetMedicine.Rescue.Api.IntegrationEvents;
 using WisdomPetMedicine.Rescue.Domain.Repositories;
 
 namespace WisdomPetMedicine.Rescue.Api
@@ -24,11 +25,15 @@ namespace WisdomPetMedicine.Rescue.Api
             services.AddRescueDb(Configuration);
             services.AddScoped<AdopterApplicationService>();
             services.AddScoped<IRescueRepository, RescueRepository>();
+            services.AddHostedService<PetFlagForAdoptionIntegrationEventHandler>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "WisdomPetMedicine.Rescue.Api", Version = "v1" });
             });
+
+    
+
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
