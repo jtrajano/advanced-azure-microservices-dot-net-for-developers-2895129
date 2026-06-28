@@ -30,7 +30,7 @@ public class PetFlagForAdoptionIntegrationEventHandler : BackgroundService
         this.serviceScopeFactory = serviceScopeFactory;
         this.logger = logger;
 
-        serviceBusClient = new ServiceBusClient(configuration["sb-pet-flag-for-adoption"]);
+        serviceBusClient = new ServiceBusClient(configuration["sb-wisdompetmedicine"]);
         serviceBusProcessor = serviceBusClient.CreateProcessor(configuration["ServiceBus:Adoption:QueueName"]);
         serviceBusProcessor.ProcessMessageAsync += ProcessMessageAsync;
         serviceBusProcessor.ProcessErrorAsync += ProcessErrorAsync;

@@ -28,7 +28,7 @@ public class PetTransferredToHospitalIntegrationEventHandler : BackgroundService
         _serviceScopeFactory = serviceScopeFactory;
         _logger = logger;
 
-        serviceBusClient = new ServiceBusClient(_configuration["sb-pet-flag-for-adoption"]);
+        serviceBusClient = new ServiceBusClient(_configuration["sb-wisdompetmedicine"]);
         serviceBusProcessor = serviceBusClient.CreateProcessor(_configuration["ServiceBus:Transfer:QueueName"]);
         serviceBusProcessor.ProcessMessageAsync += ProcessMessageAsync;
         serviceBusProcessor.ProcessErrorAsync += ProcessErrorAsync;
