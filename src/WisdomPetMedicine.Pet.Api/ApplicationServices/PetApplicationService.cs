@@ -48,6 +48,25 @@ namespace WisdomPetMedicine.Pet.Api.ApplicationServices
                     , configuration["sb-pet-flag-for-adoption"]
                     , configuration["ServiceBus:Adoption:QueueName"]);
             });
+
+
+            DomainEvents.PetTransferredToHospital.Register(async c =>
+            {
+                var integrationEvent = new PetTransferredToHospitalIntegrationEvent()
+                {
+                    Id = c.Id,
+                    Name = c.Name,
+                    Breed = c.Breed,
+                    Sex = c.Sex,
+                    Color = c.Color,
+                    DateOfBirth = c.DateOfBirth,
+                    Species = c.Species
+                };
+
+                await PublishIntegrationEventAsync(integrationEvent
+                    , configuration["sb-pet-flag-for-adoption"]
+                    , configuration["ServiceBus:Transfer:QueueName"]);
+            });
         }
 
         public async Task HandleCommandAsync(CreatePetCommand command)
